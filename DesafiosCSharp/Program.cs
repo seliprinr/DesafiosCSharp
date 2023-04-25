@@ -1,18 +1,51 @@
-﻿Console.WriteLine("Digite sua idade:");
-int idade = Convert.ToInt32(Console.ReadLine());
+﻿string mensagem = "";
 
-if (idade != 60)
+try
 {
-    Console.WriteLine("Você ainda não tem o direito a tirar o cartão idoso da prefeitura");
-    int anosfaltantes = 60 - idade;
-    int diasfaltantes = anosfaltantes * 365;
-    Console.WriteLine("Faltam ainda " + anosfaltantes + " anos para tirar seu cartão");
-    Console.WriteLine("Faltam ainda " + diasfaltantes + " dias aproximadamente para tirar seu cartão");
-    idade++;
-    int umanomaisvelho = idade;
-    diasfaltantes = (60 - umanomaisvelho) * 365;
-    Console.WriteLine("Faltaria " + diasfaltantes + " dias aproximadamente para tirar seu cartão se você tivesse um ano mais velho");
-} else
+    string produtoselecionado;
+
+    List<string> listamercado = new List<string>()
+    {
+        "Tomate",
+        "Cebola",
+        "Coca-cola",
+        "Batata",
+        "Vinho",
+        "Pilha",
+        "Suco de uva",
+        "Água",
+        "Chocolate",
+        "Mel"
+    };
+
+    Console.WriteLine("Digite um produto que gostaria de comprar:");
+
+    produtoselecionado = Console.ReadLine();
+
+    bool validaproduto = listamercado.Where(l => l.Equals(produtoselecionado)).Any();
+
+    if (validaproduto)
+    {
+        Console.WriteLine("Você pode comprar o produto " + produtoselecionado + " pois ele está disponível.");
+    }
+    else
+    {
+        Console.WriteLine("O produto " + produtoselecionado + " não está a venda.")
+    }
+
+    Console.WriteLine("Os produtos disponíveis são:");
+    foreach(string produto in listamercado.OrderBy(lista => lista))
+    {
+        Console.WriteLine(produto);
+    }
+
+    mensagem = "Obrigado por ter utilizado o sistema do mercado. E boas compras!";
+
+} catch (Exception ex)
 {
-    Console.WriteLine("Você tem o direito a tirar o cartão idoso da prefeitura");
+    mensagem = "Aconteceu o seguinte problema: " + ex.Message;
+}
+finally
+{
+    Console.WriteLine(mensagem);
 }
